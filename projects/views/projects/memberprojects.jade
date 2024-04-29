@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+    h1 Projects I am member on
+    each project in memberProjects
+        .project-container
+            .project-frame
+                h2= project.naziv_projekta
+                p= project.opis_projekta
+                p= 'Cijena: ' + project.cijena_projekta
+                div
+                    p.obavljeni-poslovi= 'Obavljeni poslovi: ' + project.obavljeni_poslovi
+                    a.edit-button(href='/projects/member/' + project._id + '/edit') Edit
+                p= 'Datum početka: ' + project.datum_pocetka
+                p= 'Datum završetka: ' + project.datum_zavrsetka
+                p= 'Voditelj projekta: ' + project.projectLeaderName
+
+    div
+        a(href='/', class='button') Back 
+    if successMessage
+        div.success
+            = successMessage
+  
+    if errorMessage
+        div.error
+            = errorMessage

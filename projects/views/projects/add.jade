@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+    h1 Add Member to Project
+    each user in users
+        p
+            span= user.firstName + ' ' + user.lastName 
+            form(action='/projects/' + projectId + '/add', method='POST')
+                input(type='hidden', name='userId', value=user._id)
+                button(type='submit', class='button') Add
+    a(href='/projects/' + projectId) Back to Project
+    if session.errorMessage
+    div.error
+        = session.errorMessage
+        - session.errorMessage = null

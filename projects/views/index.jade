@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  div
+    a(href='projects/myprojects', class='button') My Projects
+  div
+    a(href='/projects/new', class='button') New Project
+  div
+    a(href='projects/member', class='button') Member projects
+  div
+    a(href='projects/archive', class='button') Archived projects
+  div
+    a(href='/logout', class='button') Logout

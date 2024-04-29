@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+  h1 Edit Project
+  form(action=`/projects/member/${project._id}`, method='POST')
+    input(type='hidden', name='_method', value='PUT')
+    div.form-group
+      label(for='obavljeni_poslovi') Obavljeni poslovi:
+      input(type='text', id='obavljeni_poslovi', name='obavljeni_poslovi', value=project.obavljeni_poslovi)
+    button(type='submit') Save
+    a(href='/projects/member', class='button') Cancel
+    if successMessage
+        div.success
+            = successMessage
+  
+    if errorMessage
+        div.error
+            = errorMessage

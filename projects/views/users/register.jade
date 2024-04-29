@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+  h1 Register
+  form(action='/register', method='POST')
+    p
+      label(for='firstName') First Name:
+      input#firstName(type='text', name='firstName' required)
+    p
+      label(for='lastName') Last Name:
+      input#lastName(type='text', name='lastName' required)
+    p
+      label(for='email') Email:
+      input#email(type='email', name='email' required)
+    p
+      label(for='password') Password:
+      input#password(type='password', name='password' required)
+    p
+      label(for='confirmPassword') Confirm Password:
+      input#confirmPassword(type='password', name='confirmPassword' required)
+    button(type='submit') Register
+
+    if successMessage
+    div.success
+      = successMessage
+  
+    if errorMessage
+    div.error
+      = errorMessage

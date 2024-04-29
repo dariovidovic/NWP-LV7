@@ -1,0 +1,31 @@
+extends ../layout
+
+block content
+  h1.
+    #{title}
+  form#formAddProject(name="addproject", method="post", action="/projects")
+    p Naziv projekta:
+      input#inputNazivProjekta(type="text", placeholder="Naziv projekta", name="naziv_projekta", required)
+    p Opis projekta:
+      textarea#textareaOpisProjekta(placeholder="Opis projekta", name="opis_projekta" rows="4" cols="50", required, style="resize: none;")
+    p Cijena projekta:
+      input#inputCijenaProjekta(type="number", placeholder="Cijena projekta", name="cijena_projekta", required)
+    p Obavljeni poslovi:
+      input#inputObavljeniPoslovi(type="text", placeholder="Obavljeni poslovi", name="obavljeni_poslovi")
+    p Datum početka:
+      input#inputDatumPocetka(type="date", name="datum_pocetka", required)
+    p Datum završetka:
+      input#inputDatumZavrsetka(type="date", name="datum_zavrsetka", required)
+    p
+      button#btnSubmit(type="submit") Dodaj projekt
+    
+    div
+    a(href='/', class='button') Back
+
+    if successMessage
+    div.success
+      = successMessage
+  
+    if errorMessage
+    div.error
+      = errorMessage

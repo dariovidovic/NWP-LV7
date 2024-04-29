@@ -1,0 +1,37 @@
+extends ../layout
+
+block content
+    h1 My Projects
+    each project in projects
+        .project-container
+            .project-frame
+                h2= project.naziv_projekta
+                p= project.opis_projekta
+                p= 'Cijena: ' + project.cijena_projekta
+                p= 'Obavljeni poslovi: ' + project.obavljeni_poslovi
+                p= 'Datum početka: ' + project.datum_pocetka
+                p= 'Datum završetka: ' + project.datum_zavrsetka
+                p= 'Voditelj projekta: ' + projectLeaderName
+                h3 Project Members
+                ul
+                    each member in project.members
+                        li= member.id_clana.firstName + ' ' + member.id_clana.lastName
+                form(action='/projects/' + project._id, method='POST', enctype='application/x-www-form-urlencoded')
+                    input(type='hidden', value='DELETE', name='_method')
+                    button(type='submit') Delete
+                form(action='/projects/archive/' + project._id, method='POST', enctype='application/x-www-form-urlencoded')
+                    input(type='hidden', value='PUT', name='_method')
+                    button(type='submit') Archive
+                p
+                    a(href='/projects/' + project._id + '/edit') Edit
+                p
+                    a(href='/projects/' + project._id) Show
+    div
+    a(href='/', class='button') Back
+    if successMessage
+    div.success
+      = successMessage
+  
+    if errorMessage
+    div.error
+      = errorMessage

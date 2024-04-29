@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  h1 Archived Projects
+  each project in projects
+    .project-container
+      .project-frame
+        h2= project.naziv_projekta
+        p= project.opis_projekta
+        p= 'Cijena: ' + project.cijena_projekta
+        p= 'Obavljeni poslovi: ' + project.obavljeni_poslovi
+        p= 'Datum početka: ' + project.datum_pocetka
+        p= 'Datum završetka: ' + project.datum_zavrsetka
+        p= 'Voditelj projekta: ' + project.projectLeaderName
+   a(href='/', class='button') Back

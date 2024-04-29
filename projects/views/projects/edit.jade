@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+    h1 Edit Project #{project.naziv_projekta}
+    form(action=`/projects/${project._id}`, method='POST', enctype='application/x-www-form-urlencoded')
+        input(type='hidden', value='PUT', name='_method')
+        p
+            label(for='naziv_projekta') Naziv projekta:
+            input#naziv_projekta(type='text', value=project.naziv_projekta, name='naziv_projekta')
+        p
+            label(for='opis_projekta') Opis projekta:
+            textarea#opis_projekta(name='opis_projekta')= project.opis_projekta
+        p
+            label(for='cijena_projekta') Cijena projekta:
+            input#cijena_projekta(type='number', value=project.cijena_projekta, name='cijena_projekta')
+        p
+            label(for='obavljeni_poslovi') Obavljeni poslovi:
+            input#obavljeni_poslovi(type='text', value=project.obavljeni_poslovi, name='obavljeni_poslovi')
+        p
+            label(for='datum_pocetka') Datum početka:
+            input#datum_pocetka(type='date', value=formatDate(project.datum_pocetka), name='datum_pocetka')
+        p
+            label(for='datum_zavrsetka') Datum završetka:
+            input#datum_zavrsetka(type='date', value=formatDate(project.datum_zavrsetka), name='datum_zavrsetka')
+        button(type='submit') Update
+
+        a(href='/projects/myprojects') Back to All Projects
+

@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+  h1 Project Details
+  .project-details
+    h2= project.naziv_projekta
+    p Description: #{project.opis_projekta}
+    p Price: #{project.cijena_projekta}
+    p Tasks: #{project.obavljeni_poslovi}
+    p Start Date: #{project.datum_pocetka}
+    p End Date: #{project.datum_zavrsetka}
+    h2 Project Members
+    ul
+        each member in projectMembers
+          li= member.id_clana.firstName + ' ' + member.id_clana.lastName
+    p
+      a(href='/projects/' + project._id + '/add') Add Member
+    a(href='/projects/myprojects') Back to All Projects
+
+    if successMessage
+    div.success
+      = successMessage
+  
+    if errorMessage
+    div.error
+      = errorMessage
