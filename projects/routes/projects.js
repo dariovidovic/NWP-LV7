@@ -42,7 +42,6 @@ router.get('/projects/archive', authMiddleware.isLoggedIn, async function(req, r
         /*-----Povezivanje obje vrste projekata u archivedProjects-----*/
         const archivedProjects = [...leaderProjects, ...memberProjects];
 
-        // Fetch project leader names
         /*-----Dohvacanje imena leadera projekta preko projectLeaderId atributa iz projects kolekcije-----*/
         const promises = archivedProjects.map(async (project) => {
             const projectLeader = await User.findById(project.projectLeaderId);
@@ -157,7 +156,7 @@ router.put('/projects/archive/:id', authMiddleware.isLoggedIn, async (req, res, 
     }
 });
 
-/*-----Dohvacanje svih projekata-----*/
+/*-----Dohvacanje svih projekata na kojima je trenutni prijavljeni korisnik voditelj projekta-----*/
 router.get('/projects/myprojects',authMiddleware.isLoggedIn, function(req, res, next) {
     const userId = req.session.userId;
     const projectLeaderName = req.session.firstName + ' ' + req.session.lastName;
@@ -380,7 +379,6 @@ router.post('/projects/:id/add', authMiddleware.isLoggedIn, function(req, res) {
         .then(existingMember => {
             if (existingMember) {
                 req.session.errorMessage = 'User is already added to the project.';
-                // Fetch list of users except the project leader
                 User.find({ _id: { $ne: projectLeaderId } })
                     .then(users => {
                         res.render('projects/add', { projectId: projectId, users: users, errorMessage: req.session.errorMessage });
